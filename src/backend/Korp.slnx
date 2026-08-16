@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/BillingService/">
+    <Project Path="BillingService/Korp.Billing.Api/Korp.Billing.Api.csproj" />
+    <Project Path="BillingService/Korp.Billing.Application/Korp.Billing.Application.csproj" />
+    <Project Path="BillingService/Korp.Billing.Domain/Korp.Billing.Domain.csproj" />
+    <Project Path="BillingService/Korp.Billing.Infrastructure/Korp.Billing.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/StockService/">
+    <Project Path="StockService/Korp.Stock.Api/Korp.Stock.Api.csproj" />
+    <Project Path="StockService/Korp.Stock.Application/Korp.Stock.Application.csproj" />
+    <Project Path="StockService/Korp.Stock.Domain/Korp.Stock.Domain.csproj" />
+    <Project Path="StockService/Korp.Stock.Infrastructure/Korp.Stock.Infrastructure.csproj" />
+  </Folder>
+</Solution>
