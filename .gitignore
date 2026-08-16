@@ -1,0 +1,51 @@
+# ===== Build results =====
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+
+# ===== Visual Studio / Rider / VS Code =====
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# ===== Build artifacts =====
+*.dll
+*.exe
+*.pdb
+*.cache
+
+# ===== Test results =====
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+
+# ===== NuGet =====
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ===== Publish / deployment =====
+[Pp]ublish/
+*.Publish.xml
+*.pubxml
+*.pubxml.user
+*.azurePubxml
+
+# ===== Rider =====
+*.sln.iml
+
+# ===== OS files =====
+.DS_Store
+Thumbs.db
