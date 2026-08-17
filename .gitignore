@@ -46,6 +46,10 @@ artifacts/
 # ===== Rider =====
 *.sln.iml
 
+# ===== Local settings =====
+appsettings.Development.json
+!appsettings.Development.json.example
+
 # ===== OS files =====
 .DS_Store
 Thumbs.db
