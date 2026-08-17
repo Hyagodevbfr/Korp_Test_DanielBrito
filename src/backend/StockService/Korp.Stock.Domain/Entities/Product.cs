@@ -8,6 +8,8 @@ public class Product
     public string Code { get; private set; } = string.Empty;
     public string Description { get; private set; } = string.Empty;
     public int Balance { get; private set; }
+    public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
+    public DateTime UpdatedAt { get; private set; } = DateTime.UtcNow;
 
     private Product()
     {
@@ -32,7 +34,8 @@ public class Product
         {
             Code = code.Trim(),
             Description = description.Trim(),
-            Balance = balance
+            Balance = balance,
+            CreatedAt = DateTime.UtcNow
         };
 
         return Result<Product>.Success(product);
@@ -48,6 +51,7 @@ public class Product
 
         Code = code.Trim();
         Description = description.Trim();
+        UpdatedAt = DateTime.UtcNow;
 
         return Result.Success();
     }
