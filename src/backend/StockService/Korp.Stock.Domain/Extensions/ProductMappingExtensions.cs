@@ -20,7 +20,4 @@ public static class ProductMappingExtensions
 
     public static Result ApplyTo(this AddStockRequest request, Product product)
         => product.AddStock(request.Quantity);
-
-    public static Result ApplyTo(this RemoveStockRequest request, Product product)
-        => product.RemoveStock(request.Quantity);
 }
