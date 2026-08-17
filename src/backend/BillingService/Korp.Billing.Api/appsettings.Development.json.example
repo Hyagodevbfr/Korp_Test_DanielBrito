@@ -1,0 +1,11 @@
+{
+  "ConnectionStrings": {
+    "BillingDatabase": "Server=<your-localhost>;Database=KorpBilling;Trusted_Connection=True;TrustServerCertificate=True"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  }
+}
