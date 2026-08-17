@@ -1,11 +1,19 @@
-﻿namespace Korp.Stock.Domain.Common;
+namespace Korp.Stock.Domain.Common;
+
+public enum ErrorType
+{
+    Validation,
+    NotFound,
+    Conflict
+}
 
 public class Result
 {
-    protected Result(bool success, string? error = null)
+    protected Result(bool success, string? error = null, ErrorType errorType = ErrorType.Validation)
     {
         IsSuccess = success;
         Error = error;
+        ErrorType = errorType;
     }
 
     public bool IsSuccess { get; }
@@ -14,17 +22,19 @@ public class Result
 
     public string? Error { get; }
 
+    public ErrorType ErrorType { get; }
+
     public static Result Success()
         => new(true);
 
-    public static Result Failure(string error)
-        => new(false, error);
+    public static Result Failure(string error, ErrorType errorType = ErrorType.Validation)
+        => new(false, error, errorType);
 }
 
 public class Result<T> : Result
 {
-    private Result(T? value, bool success, string? error = null)
-        : base(success, error)
+    private Result(T? value, bool success, string? error = null, ErrorType errorType = ErrorType.Validation)
+        : base(success, error, errorType)
     {
         Value = value;
     }
@@ -34,6 +44,6 @@ public class Result<T> : Result
     public static Result<T> Success(T value)
         => new(value, true);
 
-    public static new Result<T> Failure(string error)
-        => new(default, false, error);
+    public static new Result<T> Failure(string error, ErrorType errorType = ErrorType.Validation)
+        => new(default, false, error, errorType);
 }
