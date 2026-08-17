@@ -7,7 +7,9 @@
   </Folder>
   <Folder Name="/StockService/">
     <Project Path="StockService/Korp.Stock.Api/Korp.Stock.Api.csproj" />
+    <Project Path="StockService/Korp.Stock.Application.Tests/Korp.Stock.Application.Tests.csproj" Id="0538ecae-2f61-4c85-b984-c4ee4c5a6a10" />
     <Project Path="StockService/Korp.Stock.Application/Korp.Stock.Application.csproj" />
+    <Project Path="StockService/Korp.Stock.Domain.Tests/Korp.Stock.Domain.Tests.csproj" Id="b6c4fe94-c584-4741-9a24-05c564ac6251" />
     <Project Path="StockService/Korp.Stock.Domain/Korp.Stock.Domain.csproj" />
     <Project Path="StockService/Korp.Stock.Infrastructure/Korp.Stock.Infrastructure.csproj" />
   </Folder>
