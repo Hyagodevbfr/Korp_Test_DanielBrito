@@ -1,7 +1,9 @@
 <Solution>
   <Folder Name="/BillingService/">
     <Project Path="BillingService/Korp.Billing.Api/Korp.Billing.Api.csproj" />
+    <Project Path="BillingService/Korp.Billing.Application.Tests/Korp.Billing.Application.Tests.csproj" Id="f138d87b-d622-45b6-bd27-bafe4b2e31ce" />
     <Project Path="BillingService/Korp.Billing.Application/Korp.Billing.Application.csproj" />
+    <Project Path="BillingService/Korp.Billing.Domain.Tests/Korp.Billing.Domain.Tests.csproj" Id="d2206e68-b520-4613-9713-f061dbdc32e1" />
     <Project Path="BillingService/Korp.Billing.Domain/Korp.Billing.Domain.csproj" />
     <Project Path="BillingService/Korp.Billing.Infrastructure/Korp.Billing.Infrastructure.csproj" />
   </Folder>
