@@ -1,4 +1,5 @@
 ﻿using Korp.Stock.Application.Abstractions;
+using Korp.Stock.Domain.Common;
 using Korp.Stock.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -45,8 +46,18 @@ public class ProductRepository : IProductRepository
         await _dbContext.Products.AddAsync(product);
     }
 
-    public async Task SaveChangesAsync()
+    public async Task<Result> SaveChangesAsync()
     {
-        await _dbContext.SaveChangesAsync();
+        try
+        {
+            await _dbContext.SaveChangesAsync();
+            return Result.Success();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return Result.Failure(
+                "O saldo do produto foi alterado por outra operação. Tente novamente.",
+                ErrorType.Conflict);
+        }
     }
 }

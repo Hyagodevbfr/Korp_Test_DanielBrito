@@ -1,4 +1,5 @@
-﻿using Korp.Stock.Domain.Entities;
+﻿using Korp.Stock.Domain.Common;
+using Korp.Stock.Domain.Entities;
 
 namespace Korp.Stock.Application.Abstractions;
 
@@ -9,5 +10,5 @@ public interface IProductRepository
     Task<bool> ExistsByCodeAsync(string code, int? excludingId = null);
     Task<IReadOnlyDictionary<int, Product>> GetByIdsAsync(IEnumerable<int> ids);
     Task AddAsync(Product product);
-    Task SaveChangesAsync();
+    Task<Result> SaveChangesAsync();
 }
