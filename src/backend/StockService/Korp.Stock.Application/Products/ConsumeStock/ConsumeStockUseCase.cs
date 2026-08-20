@@ -27,8 +27,6 @@ public class ConsumeStockUseCase(IProductRepository repository) : IConsumeStockU
         if (applyResult.IsFailure)
             return applyResult;
 
-        await repository.SaveChangesAsync();
-
-        return Result.Success();
+        return await repository.SaveChangesAsync();
     }
 }

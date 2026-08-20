@@ -25,7 +25,11 @@ public class CreateProductUseCase(IProductRepository repository) : ICreateProduc
         var product = result.Value!;
 
         await repository.AddAsync(product);
-        await repository.SaveChangesAsync();
+
+        var saveResult = await repository.SaveChangesAsync();
+
+        if (saveResult.IsFailure)
+            return Result<ProductDto>.Failure(saveResult.Error!, saveResult.ErrorType);
 
         return Result<ProductDto>.Success(product.ToDto());
     }

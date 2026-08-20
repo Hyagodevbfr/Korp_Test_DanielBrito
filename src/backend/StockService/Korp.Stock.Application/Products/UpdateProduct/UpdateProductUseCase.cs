@@ -27,7 +27,9 @@ public class UpdateProductUseCase(IProductRepository repository) : IUpdateProduc
         if (result.IsFailure)
             return Result<ProductDto>.Failure(result.Error!, result.ErrorType);
 
-        await repository.SaveChangesAsync();
+        var saveResult = await repository.SaveChangesAsync();
+        if (saveResult.IsFailure)
+            return Result<ProductDto>.Failure(saveResult.Error!, saveResult.ErrorType);
 
         return Result<ProductDto>.Success(product.ToDto());
     }
