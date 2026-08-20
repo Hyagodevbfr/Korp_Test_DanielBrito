@@ -10,6 +10,7 @@ public class Product
     public int Balance { get; private set; }
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; private set; } = DateTime.UtcNow;
+    public byte[] RowVersion { get; private set; }
 
     private Product()
     {

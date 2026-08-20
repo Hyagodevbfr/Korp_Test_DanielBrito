@@ -17,5 +17,6 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.Balance).IsRequired();
         builder.Property(p => p.CreatedAt).IsRequired();
         builder.Property(p => p.UpdatedAt).IsRequired();
+        builder.Property(p => p.RowVersion).IsRowVersion();
     }
 }
