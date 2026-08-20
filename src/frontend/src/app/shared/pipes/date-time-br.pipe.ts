@@ -25,10 +25,16 @@ export class DateTimeBrPipe implements PipeTransform {
       return '';
     }
 
-    // O backend envia a data sem indicação de timezone (ex.: "2026-08-18T22:57:15" ou
-    // "2026-08-18 22:57:15"), mas sempre em UTC (DateTime.UtcNow). Por isso o "Z" é
-    // sempre acrescentado aqui, independentemente do separador usado.
-    const isoValue = `${value.replace(' ', 'T')}Z`;
+    // O backend normalmente envia a data sem indicação de timezone (ex.:
+    // "2026-08-18T22:57:15" ou "2026-08-18 22:57:15"), mas sempre em UTC
+    // (DateTime.UtcNow), então acrescentamos o "Z" para o parse ser correto.
+    // Em alguns casos (ex.: nota recém-fechada, cujo DTO é montado a partir da
+    // entidade em memória em vez de recarregado do banco) o próprio backend já
+    // inclui o "Z" ou um offset (+HH:mm) — nesses casos não duplicamos o sufixo,
+    // senão o parse falha e a data desaparece.
+    const normalized = value.replace(' ', 'T');
+    const hasTimezone = /[zZ]$|[+-]\d{2}:\d{2}$/.test(normalized);
+    const isoValue = hasTimezone ? normalized : `${normalized}Z`;
     const date = new Date(isoValue);
 
     if (isNaN(date.getTime())) {

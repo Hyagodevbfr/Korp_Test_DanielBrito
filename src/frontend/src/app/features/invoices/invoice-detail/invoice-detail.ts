@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -155,7 +155,8 @@ export class InvoiceDetail implements OnInit {
     private invoiceService: InvoiceService,
     private toast: Toaster,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef
   ) {}
 
   get title(): string {
@@ -195,6 +196,12 @@ export class InvoiceDetail implements OnInit {
             : { ...this.invoice, closedAt: new Date().toISOString() };
 
           this.toast.success('Nota fiscal fechada com sucesso!');
+
+          // Força a atualização síncrona do DOM antes de abrir o diálogo de
+          // impressão: window.print() é síncrono e, sem isso, o navegador
+          // captura o layout ainda com "closedAt" antigo (nota "Em aberto"),
+          // pois o Angular só re-renderizaria no próximo ciclo de change detection.
+          this.cdr.detectChanges();
           window.print();
         },
       });
