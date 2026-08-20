@@ -4,17 +4,39 @@
 // Learn more about theming and how to use it for your application's
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
+@use 'tailwindcss';
 
 html {
-  height: 100%;
   @include mat.theme(
     (
       color: (
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
+        primary: mat.$cyan-palette,
+        tertiary: mat.$rose-palette,
       ),
-      typography: Roboto,
+      typography: (
+        plain-family: 'Inter',
+        brand-family: 'Inter',
+        bold-weight: 600,
+        medium-weight: 500,
+        regular-weight: 400,
+      ),
       density: 0,
+    )
+  );
+
+  // Paleta de marca Korp: azul petróleo escuro como cor primária e
+  // magenta vibrante como tertiary/accent, com o vinho como tom de apoio
+  // (usado no on-tertiary-container e na barra de destaque do header).
+  @include mat.theme-overrides(
+    (
+      primary: #204552,
+      on-primary: #ffffff,
+      primary-container: #dce7e9,
+      on-primary-container: #0f2a31,
+      tertiary: #e4004b,
+      on-tertiary: #ffffff,
+      tertiary-container: #ffd9e3,
+      on-tertiary-container: #58253b,
     )
   );
 }
@@ -34,6 +56,223 @@ body {
 
   // Reset the user agent margin.
   margin: 0;
-  height: 100%;
+
+  @include mat.dialog-overrides(
+    (
+      container-shape: 6px,
+    )
+  );
+
+  --mat-sys-body-large-size: 0.875rem;
 }
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+.elevated {
+  box-shadow: var(--mat-sys-level2);
+}
+
+button[matButton] {
+  @include mat.button-overrides(
+    (
+      filled-container-shape: 6px,
+      outlined-container-shape: 6px,
+      text-container-shape: 6px,
+      protected-container-shape: 6px,
+      tonal-container-shape: 6px,
+      filled-horizontal-padding: 12px,
+      outlined-horizontal-padding: 12px,
+      text-horizontal-padding: 12px,
+      protected-horizontal-padding: 12px,
+      tonal-horizontal-padding: 12px,
+      filled-icon-spacing: 0px,
+      filled-icon-offset: 1px,
+      filled-container-height: 36px,
+      outlined-container-height: 36px,
+      text-container-height: 36px,
+      protected-container-height: 36px,
+      tonal-container-height: 36px,
+    )
+  );
+}
+
+button[matButton='outlined'].danger {
+  @include mat.button-overrides(
+    (
+      outlined-label-text-color: var(--mat-sys-error),
+      outlined-outline-color: var(--mat-sys-error),
+      outlined-state-layer-color: var(--mat-sys-error),
+    )
+  );
+}
+
+button[matIconButton] {
+  @include mat.icon-button-overrides(
+    (
+      container-shape: 6px,
+    )
+  );
+}
+
+button[matIconButton].danger {
+  @include mat.icon-button-overrides(
+    (
+      icon-color: var(--mat-sys-error),
+      state-layer-color: var(--mat-sys-error),
+    )
+  );
+}
+
+button[matIconButton].small {
+  @include mat.icon-button-overrides(
+    (
+      icon-size: 24px,
+      touch-target-size: 28px,
+      state-layer-size: 28px,
+    )
+  );
+}
+
+mat-icon.small {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.danger {
+  color: var(--mat-sys-error);
+}
+
+mat-form-field {
+  @include mat.theme(
+    (
+      density: -4,
+    )
+  );
+
+  width: 100%;
+}
+
+mat-sidenav {
+  @include mat.sidenav-overrides(
+    (
+      container-width: 250px,
+      container-shape: 0px,
+      container-background-color: white,
+      container-divider-color: var(--mat-sys-outline-variant),
+    )
+  );
+
+  @include mat.list-overrides(
+    (
+      active-indicator-color: var(--mat-sys-primary),
+      active-indicator-shape: 6px,
+      list-item-one-line-container-height: 40px,
+    )
+  );
+}
+
+// Style to fix the weird border with angular material + tailwindcss
+.mdc-notched-outline__notch {
+  border-right: none !important;
+}
+
+// Densidade compacta para inputs Material. `.density-compact` é usada nas barras
+// de busca das listagens; `.density-compact-lg` é uma variante mais alta (com fundo
+// branco) usada nos formulários. Ficam aqui (fora do encapsulamento dos componentes)
+// porque alteram markup interno do Material.
+.density-compact .mat-mdc-text-field-wrapper {
+  height: 44px !important;
+  align-items: center;
+}
+
+.density-compact .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+.density-compact-lg .mat-mdc-text-field-wrapper {
+  height: 48px !important;
+  align-items: center;
+  background-color: #ffffff !important;
+}
+
+// Snackbar (Toaster) variants
+.toast-success {
+  --mdc-snackbar-container-color: #166534;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+  --mat-snack-bar-button-color: #ffffff;
+}
+
+.toast-error {
+  --mdc-snackbar-container-color: #b91c1c;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+  --mat-snack-bar-button-color: #ffffff;
+}
+
+.toast-warning {
+  --mdc-snackbar-container-color: #b45309;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+  --mat-snack-bar-button-color: #ffffff;
+}
+
+// Impressão da nota fiscal (invoice-detail.ts). Precisa ficar aqui, fora do
+// encapsulamento de estilos do Angular, porque "body *" e "#printable-invoice"
+// precisam alcançar elementos de fora do componente (header, layout).
+.print-only {
+  display: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #printable-invoice,
+  #printable-invoice * {
+    visibility: visible;
+  }
+
+  #printable-invoice {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 20px !important;
+    background-color: #ffffff !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  @page {
+    margin: 1.5cm;
+  }
+}
+
+//Responsive grid
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 1rem;
+}
