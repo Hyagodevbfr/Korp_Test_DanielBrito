@@ -19,6 +19,9 @@ namespace Korp.Stock.Application.Tests
             productRepositoryMock
                 .Setup(repository => repository.ExistsByCodeAsync(request.Code, null))
                 .ReturnsAsync(false);
+            productRepositoryMock
+                .Setup(repository => repository.SaveChangesAsync())
+                .ReturnsAsync(Result.Success());
 
             var useCase = new CreateProductUseCase(productRepositoryMock.Object);
 
