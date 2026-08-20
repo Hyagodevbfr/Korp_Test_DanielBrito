@@ -10,3 +10,8 @@ export interface CreateProductRequest{
     description: string;
     balance: number;
 }
+
+export interface UpdateProductRequest{
+    code: string;
+    description: string;
+}
