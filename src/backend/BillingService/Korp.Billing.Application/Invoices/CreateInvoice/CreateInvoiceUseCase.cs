@@ -16,7 +16,7 @@ public class CreateInvoiceUseCase(
 {
     public async Task<Result<InvoiceDto>> ExecuteAsync(CreateInvoiceRequest request)
     {
-        var productIds = request.Items.Select(item => item.ProductId).Distinct();
+        var productIds = request.Items.Select(item => item.ProductId).Distinct().ToList();
 
         var productsResult = await stockServiceClient.GetProductsAsync(productIds);
 
